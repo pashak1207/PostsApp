@@ -1,8 +1,8 @@
 import {
   CREATE_POST,
-  FETCH_POSTS,
   HIDE_ERROR,
   HIDE_LOADER,
+  REQUEST_POSTS,
   SHOW_ERROR,
   SHOW_LOADER,
 } from "./types";
@@ -14,12 +14,12 @@ export function createPostAction(payload) {
   };
 }
 
-function loadingOn() {
+export function loadingOn() {
   return {
     type: SHOW_LOADER,
   };
 }
-function loadingOff() {
+export function loadingOff() {
   return {
     type: HIDE_LOADER,
   };
@@ -44,18 +44,21 @@ export function hideError() {
 }
 
 export function fetchPostsActions() {
-  return async function (dispatch) {
-    try {
-      dispatch(loadingOn());
-      const response = await fetch(
-        "https://jsonplaceholder.typicode.com/posts?_limit=5"
-      );
-      const json = await response.json();
-      dispatch({ type: FETCH_POSTS, payload: json });
-      dispatch(loadingOff());
-      dispatch(hideError());
-    } catch (e) {
-      dispatch(showError(e));
-    }
+  return {
+    type: REQUEST_POSTS,
   };
+  // return async function (dispatch) {
+  //   try {
+  //     dispatch(loadingOn());
+  //     const response = await fetch(
+  //       "https://jsonplaceholder.typicode.com/posts?_limit=5"
+  //     );
+  //     const json = await response.json();
+  //     dispatch({ type: FETCH_POSTS, payload: json });
+  //     dispatch(loadingOff());
+  //     dispatch(hideError());
+  //   } catch (e) {
+  //     dispatch(showError(e));
+  //   }
+  // };
 }
