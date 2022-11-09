@@ -1,4 +1,4 @@
-import { CREATE_POST, FETCH_POSTS } from "./types";
+import { CREATE_POST, FETCH_POSTS, REMOVE_POST } from "./types";
 
 const initialState = {
   posts: [],
@@ -11,6 +11,14 @@ export const postsReducer = (state = initialState, action) => {
       return { ...state, posts: state.posts.concat(action.payload) };
     case FETCH_POSTS:
       return { ...state, fetchedPosts: action.payload };
+    case REMOVE_POST:
+      return {
+        ...state,
+        posts: state.posts.filter((post) => post.id !== action.payload),
+        fetchedPosts: state.fetchedPosts.filter(
+          (post) => post.id !== action.payload
+        ),
+      };
     default:
       return state;
   }

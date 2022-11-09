@@ -2,6 +2,7 @@ import {
   CREATE_POST,
   HIDE_ERROR,
   HIDE_LOADER,
+  REMOVE_POST,
   REQUEST_POSTS,
   SHOW_ERROR,
   SHOW_LOADER,
@@ -10,6 +11,13 @@ import {
 export function createPostAction(payload) {
   return {
     type: CREATE_POST,
+    payload: payload,
+  };
+}
+
+export function removePostAction(payload) {
+  return {
+    type: REMOVE_POST,
     payload: payload,
   };
 }
@@ -47,18 +55,4 @@ export function fetchPostsActions() {
   return {
     type: REQUEST_POSTS,
   };
-  // return async function (dispatch) {
-  //   try {
-  //     dispatch(loadingOn());
-  //     const response = await fetch(
-  //       "https://jsonplaceholder.typicode.com/posts?_limit=5"
-  //     );
-  //     const json = await response.json();
-  //     dispatch({ type: FETCH_POSTS, payload: json });
-  //     dispatch(loadingOff());
-  //     dispatch(hideError());
-  //   } catch (e) {
-  //     dispatch(showError(e));
-  //   }
-  // };
 }

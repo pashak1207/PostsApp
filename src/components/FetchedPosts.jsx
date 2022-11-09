@@ -1,7 +1,7 @@
 import React from "react";
 import Post from "./Post";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPostsActions } from "../redux/actions";
+import { fetchPostsActions, removePostAction } from "../redux/actions";
 import { Loader } from "./Loader/Loader";
 import { Error } from "./Error";
 
@@ -25,7 +25,13 @@ export default () => {
       {isLoading ? (
         <Loader />
       ) : (
-        posts.map((post) => <Post key={post.id} post={post} />)
+        posts.map((post) => (
+          <Post
+            handler={() => dispatch(removePostAction(post.id))}
+            key={post.id}
+            post={post}
+          />
+        ))
       )}
     </>
   );
